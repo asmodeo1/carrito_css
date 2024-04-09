@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <style>
+      /* En este caso vamos a usar grid-template-areas en el grid para crear las diferentes 
+      zonas de la rejilla. Por eso solo vamos a mostrar comentarios con los cambios */
+         * {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            text-decoration: none;
+            list-style-type: none;
+         }
+         body {
+            background-color: #484d59;
+         }
+         .carrito {
+            max-width: 700px;
+            margin: auto;
+            display: grid;
+            gap: 15px;
+            /* Definimos las diferentes filas o columnas que deseamos, pudiendo poner
+            cualquier valor y número de letras para los diferentes nombres. En este caso 
+            hacemos que en, of y pie ocupen tres columnas, pro dos columnas y tres filas, 
+            y res, pag y ayuda una sola columna y fila en el lado derecho.
+
+            Luego deberemos ir aplicando la propiedad grid-area con el nombre deseado en cada
+            uno de los elementos del grid.
+            Este modo hace mucho más fácil cambiar los elementos de sitio y espacio, simplemente
+            cambiando esta plantilla */
+            grid-template-areas: 
+                "enc enc enc"
+                "of of of"
+                "pro pro res"
+                "pro pro pag"
+                "pro pro ayu"
+                "pie pie pie";
+         }
+         .carrito header, .carrito .oferta, .carrito footer {
+            padding: 10px;
+            font-family: "Heebo", sans-serif;
+            text-align: center;
+         }
+         /* Indicamos donde va el encabezado, oferta y pie */
+         .carrito header{
+            grid-area: enc;
+         }
+         .carrito .oferta {
+            grid-area: of;
+         }
+         .carrito footer {
+            grid-area: pie;
+         }
+         .carrito header, .carrito footer {
+            background-color: #2E323E;
+            color:aliceblue;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+         }
+         .carrito .oferta {
+            background-color: #777A52;
+            color: black;
+         }
+         .productos, .pagar, .ayuda {
+            border-radius: 3px;
+         }
+         .productos {
+            background-color: #5c6377;
+            font-family:'Courier New', Courier, monospace;
+            color:white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 15px;
+         }
+         /* Indicamos donde va el producto */
+         .productos  {
+            grid-area: pro;
+         }
+         .productos li {
+            border-bottom: 1px dotted gray;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+         }
+         .resumen {
+            /* Indicamos donde va el resumen */
+            grid-area: res;
+            background-color: #5C527A;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+         }
+         .pagar {
+            /* Indicamos donde va lo de pagar */
+            grid-area:pag;
+            background-color: #527A70;
+            font-size: .9em;
+            padding: 10px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+         }
+         .pagar a {
+            background-color: aquamarine;
+            padding: 5px 10px;
+            display: inline-block;
+            box-shadow: 2px 2px 2px black;
+            border-radius: 3px;
+            color: black;
+         }
+         .ayuda {
+            background-color: #7A5C52;
+            color:#d4a99b;
+            /* Indicamos donde va la ayuda */
+            grid-area: ayu;
+            padding: 6px;
+         }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="carrito">
+            <header>carrito</header>
+            <div class="oferta">&#x2B50; ¡La oferta termina pronto! &#x2B50;</div>
+            <ul class="productos">
+                <li>
+                    <p>Vestido de fiesta 👗</p>
+                    <p>231.00 €</p>
+                </li>
+                <li>
+                    <p>Zapatillas 👟</p>
+                    <p>115.00 €</p>
+                </li>
+                <li>
+                    <p>Bikini 👙</p>
+                    <p>69.00 €</p>
+                </li>                
+            </ul>
+            <div class="resumen">
+                <p>🛒 3 productos</p>
+                <p>415.00 €</p>
+            </div>
+            <div class="pagar">
+                <a href="">pagar 💳</a>
+            </div>
+            <div class="ayuda">❓ayuda</div>
+            <footer>condiciones</footer>
+        </section>
+    </main>
+</body>
+</html>

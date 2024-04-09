@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito</title>
+    <style>
+      /* En este ejercicio vamos a usar para las imágenes los propios emoticonos
+      que nos ofrece Unicode (conjunto de caracteres que incluye caracteres occidentales,
+      árabes, hebreos, chinos, cirílicos,...), los cuales no dejar de ser letras, con lo que podemos
+      cambiarles el tamaño con font-size, usar text-align,... aunque no el color. Además
+      cada sistema operativo o programa puede mostrarlos con variaciones, pues Unicode solo
+      indica lo que es el emoticono, no como mostrarlo.
+
+      Para buscar estos emojis podemos usar:
+
+      - alguna página web como esta: http://xahlee.info/comp/unicode_index.html
+      - en Windows pulsar la tecla Windows + . para que se muestre la ventana de emojis
+
+      Si usamos la primera opción tenemos varias opciones una vez encontrado el emoji deseado:
+
+      - copiar el emoji tal cual y pegarlo, pues es un carácter
+      - copiar su valor Unicode que se muestra en la parte inferior de la forma U+seguido de varias
+      letras y/o números o el valor HEXD debajo del emoji. Luego en la parte deseada de HTML pondremos &#xletrasYnumeros;
+      Por ejemplo, si el HEXD es 10AF0, pondremos &#x10AF0;
+      
+      Otra opción sería usar algún tipo de letra que tenga las imágenes deseadas o usar
+      imágenes. */
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+        text-decoration: none;
+        /* Quitamos el estilo de las listas, es decir, los puntos, cuadrados, números, .... */
+        list-style-type: none;
+      }
+      body {
+        background-color: #484d59;
+      }
+      .carrito {
+        /* Establecemos un ancho máximo del contenido */
+        max-width: 700px;
+        /* Lo centramos horizontalmente */
+        margin: auto;
+        display: grid;
+        /* Definimos dos columnas, la primera ocupa el doble del espacio sobrante */
+        grid-template-columns: 2fr 1fr;
+        /* Espacio entre columnas y filas */
+        gap: 15px;
+      }
+      /* Esto todo es común para estos elementos, con lo que evitamos repetirlo */
+      .carrito header,
+      .carrito .oferta,
+      .carrito footer {
+        padding: 10px;
+        /* Ocupará toda la fila, es decir, de la línea 1 a la 3.
+            Podemos usar tambié grid-column: 1 / span 2 para indicar columnas */
+        grid-column: 1 / 3;
+        /* Como nuestro sistema posiblemente no tenga el tipo de letra Heebo,
+            usará una de la famila sans-serif */
+        font-family: "Heebo", sans-serif;
+        text-align: center;
+      }
+      .carrito header,
+      .carrito footer {
+        background-color: #2e323e;
+        color: aliceblue;
+        font-size: 1.1rem;
+        /* Ponemos todo el texto en mayúsculas */
+        text-transform: uppercase;
+      }
+      .carrito .oferta {
+        background-color: #777a52;
+        color: black;
+      }
+      .productos,
+      .pagar,
+      .ayuda {
+        border-radius: 3px;
+      }
+      .productos {
+        background-color: #5c6377;
+        font-family: "Courier New", Courier, monospace;
+        color: white;
+        font-size: 1.4rem;
+        font-weight: bold;
+        padding: 15px;
+      }
+      .productos {
+        /* Queremos que los productos ocupen tres filas (la 3, 4 y 5), con lo
+            que va de la línea 3 a la 6 */
+        grid-row: 3 / 6;
+      }
+      .productos li {
+        border-bottom: 1px dotted gray;
+        /* Una manera sencilla de colocar el nombre del producto a la izquierda y 
+            su precio a la derecha, es usar flex y justify-content.
+            Otra opción sería usar float:left para el producto y float:right  para
+            el precio, pero habría que aplicarle el clearfix al li */
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      .resumen {
+        /* Colocamos el resumen en la fila 3, columna 2 */
+        grid-column: 2;
+        grid-row: 3;
+        background-color: #5c527a;
+        color: white;
+        /* Volvemos a usar flex para poner el texto del resumen a la izquierda y 
+            el total a la derecha */
+        display: flex;
+        justify-content: space-between;
+        /* Centramos el texto del resumen y el total verticalmente */
+        align-items: center;
+        padding: 8px;
+      }
+      .pagar {
+        /* Colocamos el resumen en la fila 4, columna 2 */
+        grid-column: 2;
+        grid-row: 4;
+        background-color: #527a70;
+        font-size: 0.9em;
+        padding: 10px;
+        /* Volvemos a usar flex para poner el botón a la derecha */
+        display: flex;
+        justify-content: right;
+        /* Centramos el botoón */
+        align-items: center;
+      }
+      .pagar a {
+        background-color: aquamarine;
+        /* Para poner padding superior e inferior a un elemento en línea, y que
+            los elementos a su alrededor lo tengan en cuenta, debemos
+            convertirlo a inline-block. De no hacerlo parte del color de fondo superior
+            taparía el texto que hubiese encima */
+        display: inline-block;
+        padding: 5px 10px;
+        box-shadow: 2px 2px 2px black;
+        border-radius: 3px;
+        color: black;
+      }
+      .ayuda {
+        background-color: #7a5c52;
+        color: #d4a99b;
+        /* Colocamos el resumen en la fila 5, columna 2 */
+        grid-column: 2;
+        grid-row: 5;
+        padding: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="carrito">
+        <header>carrito</header>
+        <div class="oferta">&#x2B50; ¡La oferta termina pronto! &#x2B50;</div>
+        <ul class="productos">
+          <li>
+            <p>Vestido de fiesta 👗</p>
+            <p>231.00 €</p>
+          </li>
+          <li>
+            <p>Zapatillas 👟</p>
+            <p>115.00 €</p>
+          </li>
+          <li>
+            <p>Bikini 👙</p>
+            <p>69.00 €</p>
+          </li>
+        </ul>
+        <div class="resumen">
+          <p>🛒 3 productos</p>
+          <p>415.00 €</p>
+        </div>
+        <div class="pagar">
+          <a href="">pagar 💳</a>
+        </div>
+        <div class="ayuda">❓ayuda</div>
+        <footer>condiciones</footer>
+      </section>
+    </main>
+  </body>
+</html>
